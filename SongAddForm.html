@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content='width=device-width,initial-scale=1' />
+   <link rel="stylesheet" href='css/style.css' />
+   <title> </title>
+
+</head>
+<body>
+   <!-- // title - tytuł piosenki
+   // duration - czas trwania (s)
+   // mustBe - (true/false) - określenie czy dana piosenka musi być uwzględniona w liście
+   // tempo - ('slow'/'moderate'/'fast')
+   // energyRating - (1-5) - określa siłę i energię pioenski
+   // start - (true/false/'etrue') - czy dana piosenka pasuje na początek seta, czy nie (wartość etrue oznacza że podczas ustalania setów na imprezy prywatne piosenka może być uwzględniona jako początkowa, inaczej nie);
+   // end - (true/false) - czy dana piosenka pasuje na koniec seta
+   // bis - (true/false) - czy dana piosenka może być zagrana na bis
+   // only - ('event'/'concert'/false)  - czy ma być uwzględniana tylko na imprezach zamkniętych czy tylko na koncertach, czy zawsze
+   // specialCondition - (condition) - niektóre piosenki nie powinny występować po innych, albo w pierwszej części koncertu - tutaj będą przechowywane takie warunki dla pojedynczych piosenek, które będą uwzględniane przy losowaniu -->
+
+   <form id='songAddForm'>
+      <label>Title
+         <input type='text' name='title' />
+      </label>
+      <label>Must Be
+         <input type='radio' name='mustBe' value=true />
+         <input type='radio' name='mustBe' value=false checked/>
+      </label>
+      <label>Tempo
+         <select name='tempo'>
+            <option value='slow'>Slow</option>
+            <option value='moderate' selected>Moderate</option>
+            <option value='fast'>Fast</option>
+         </select>
+      </label>
+      <label> Energy Rating
+         <input type='radio' name='energyRating' value=1 />
+         <input type='radio' name='energyRating' value=2 />
+         <input type='radio' name='energyRating' value=3 checked />
+         <input type='radio' name='energyRating' value=4 />
+         <input type='radio' name='energyRating' value=5 />
+      </label>
+      <label> On Start
+         <input type='radio' name='start' value=true />
+         <input type='radio' name='start' value=false checked/>
+      </label>
+      <label> On End
+         <input type='radio' name='end' value=true />
+         <input type='radio' name='end' value=false checked/>
+      </label>
+      <label> On Encore
+         <input type='radio' name='encore' value=true />
+         <input type='radio' name='encore' value=false checked/>
+      </label>
+      <label>Event type:
+         <select name='only'>
+            <option value='concert'>Concert</option>
+            <option value='event' selected>Event</option>
+            <option value='false' selected>Both</option>
+         </select>
+      </label>
+
+   </form>
+
+
+
+</body>
+
+<script type="text/javascript" src='js/jquery-3.1.1.min.js'></script>
+
+<script type="text/javascript" src='js/song_base.js'></script>
+<script type="text/javascript" src='js/app.js'></script>
+
+</html>
