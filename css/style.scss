@@ -1,0 +1,27 @@
+@import '_reset.scss';
+
+$basic_1: red;
+$basic_2: black;
+
+
+.container {
+   width: 100%;
+   height: 90vh;
+   border: 1px solid $basic_1;
+
+
+   display: flex;
+   justify-content: space-around;
+
+   ul {
+      border: 1px solid blue;
+   }
+
+}
+
+button#generateSetList {
+   height: 10vh;
+   width: 100%;
+   text-align: center;
+   
+}

@@ -19,57 +19,84 @@
    // only - ('event'/'concert'/false)  - czy ma być uwzględniana tylko na imprezach zamkniętych czy tylko na koncertach, czy zawsze
    // specialCondition - (condition) - niektóre piosenki nie powinny występować po innych, albo w pierwszej części koncertu - tutaj będą przechowywane takie warunki dla pojedynczych piosenek, które będą uwzględniane przy losowaniu -->
 
-   <form id='songAddForm'>
-      <label>Title
+   <form id='songAddForm' method='POST'>
+      <div>Title
          <input type='text' name='title' />
-      </label>
-      <label>Must Be
+      </div>
+      <div>Duration (s):
+         <input type='number' name='duration' />
+      </div>
+      <div>Must Be
          <input type='radio' name='mustBe' value=true />
          <input type='radio' name='mustBe' value=false checked/>
-      </label>
-      <label>Tempo
+      </div>
+      <div>Tempo
          <select name='tempo'>
             <option value='slow'>Slow</option>
             <option value='moderate' selected>Moderate</option>
             <option value='fast'>Fast</option>
          </select>
-      </label>
-      <label> Energy Rating
-         <input type='radio' name='energyRating' value=1 />
-         <input type='radio' name='energyRating' value=2 />
-         <input type='radio' name='energyRating' value=3 checked />
-         <input type='radio' name='energyRating' value=4 />
-         <input type='radio' name='energyRating' value=5 />
-      </label>
-      <label> On Start
-         <input type='radio' name='start' value=true />
-         <input type='radio' name='start' value=false checked/>
-      </label>
-      <label> On End
-         <input type='radio' name='end' value=true />
-         <input type='radio' name='end' value=false checked/>
-      </label>
-      <label> On Encore
-         <input type='radio' name='encore' value=true />
-         <input type='radio' name='encore' value=false checked/>
-      </label>
-      <label>Event type:
+      </div>
+      <div> Energy Rating
+         1<input type='radio' name='energyRating' value=1 />
+         2<input type='radio' name='energyRating' value=2 />
+         3<input type='radio' name='energyRating' value=3 checked />
+         4<input type='radio' name='energyRating' value=4 />
+         5<input type='radio' name='energyRating' value=5 />
+      </div>
+      <div> On Start
+         <label>Yes<input type='radio' name='start' value=true /></label>
+         <label>No<input type='radio' name='start' value=false checked/></label>
+      </div>
+      <div> On End
+         <label>Yes<input type='radio' name='end' value=true /></label>
+         <label>No<input type='radio' name='end' value=false checked/></label>
+      </div>
+      <div> On Encore
+         <label>Yes<input type='radio' name='encore' value=true  /></label>
+         <label>No<input type='radio' name='encore' value=false checked/></label>
+      </div>
+      <div>Event type:
          <select name='only'>
             <option value='concert'>Concert</option>
             <option value='event' selected>Event</option>
             <option value='false' selected>Both</option>
          </select>
-      </label>
-
+      </div>
+      <button>Add Song!</button>
    </form>
+
+   <script type="text/javascript" src='js/jquery-3.1.1.min.js'></script>
+   <script type="text/javascript" src='js/song_base.js'></script>
+   <script type="text/javascript">
+
+   $('#songAddForm').on('submit',function(e){
+      e.preventDefault();
+
+      var title = $("input[name='title']").val();
+      var duration = $("input[name='duration']").val();
+      var mustBe =  $("input[name='mustBe'][checked]").val();
+      var tempo = $("select[name='tempo']>option[selected]").val();
+      var energyRating = $("input[name='energyRating'][checked]").val();
+      var start = $("input[name='start'][checked]").val();
+      var end = $("input[name='end'][checked]").val();
+      var encore = $("input[name='encore'][checked]").val();
+      var only = $("select[name='only']>option[selected]").val();
+      // var specialCondition =
+
+      var songToAdd = new Song(title, duration, mustBe, tempo, energyRating, start, end, encore, only);
+      console.log(title, duration, mustBe, tempo, energyRating, start, end, encore, only);
+   })
+
+   </script>
+
+
 
 
 
 </body>
 
-<script type="text/javascript" src='js/jquery-3.1.1.min.js'></script>
 
-<script type="text/javascript" src='js/song_base.js'></script>
-<script type="text/javascript" src='js/app.js'></script>
+
 
 </html>

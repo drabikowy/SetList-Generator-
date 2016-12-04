@@ -1,29 +1,27 @@
-{
 
-   "songs":[
 
-      title: 'title',
-      mustBe: 'mustBe';
-      duration: 'duration',
-      tempo: tempo,
-      energyRating: energyRating,
-      start: start,
-      end: end,
-      bis: bis,
-      only: only,
-      specialCondition: 'condition'
+{"songs":[
+
+   {
+      "title": ,
+      "mustBe":,
+      "duration": ,
+      "tempo": ,
+      "energyRating": ,
+      "start": ,
+      "end": ,
+      "bis": ,
+      "only": ,
+      "specialCondition": }
 
    ]
+},
 
+{"savedSetlists": [
 
+   {
+      "name": "nazwa_setlisty",
+      "duration": "time" },
 
-
-
-
-
-
-
-
-
-
+   ]
 }
