@@ -1,27 +1,91 @@
+
 @import '_reset.scss';
+// TYMCZASOWO:
+@import url('https://fonts.googleapis.com/css?family=Shadows+Into+Light+Two');
 
 $basic_1: red;
 $basic_2: black;
 
+$main_font: 'Shadows Into Light Two';
+$setlist_font: ;
 
-.container {
-   width: 100%;
-   height: 90vh;
-   border: 1px solid $basic_1;
-
-
-   display: flex;
-   justify-content: space-around;
-
-   ul {
-      border: 1px solid blue;
+@mixin bgImage {
+   &:before {
+      content: "";
+      position: fixed;
+      width: 200%;
+      height: 200%;
+      top: -50%;
+      left: -50%;
+      z-index: -1;
+      background: url('../images/main_background.png') top left / 25px repeat white;
+      -webkit-transform: rotate(30deg);
+      -moz-transform: rotate(30deg);
+      -ms-transform: rotate(30deg);
+      -o-transform: rotate(30deg);
+      transform: rotate(30deg);
+      opacity: 0.5;
    }
+}
+
+// BASIC SECTIONS
+.main_container {
+   @include bgImage;
+   height: 100vh;
+   padding: 0;
+
+   nav#menu {
+      height: 8vh;
+      background-color: lightgrey;
+   }
+
+   section#setlist {
+      font-family: $main_font;
+      font-size: 1.5em;
+      height: 88vh;
+      padding: 30px;
+
+   }
+
+   section#generator {
+      position: fixed;
+      bottom: 4vh;
+      height: 4vh;
+      background-color: powderblue;
+   }
+
+   footer{
+      height: 4vh;
+      text-align: center;
+      background-color: lightsalmon;
+   }
+}
+
+
+
+// GENERATOR
+buton#toggleGenerator {
 
 }
 
 button#generateSetList {
-   height: 10vh;
-   width: 100%;
+
    text-align: center;
-   
+
+}
+
+
+// SIDEBAR
+
+div.sidebar {
+   position: absolute;
+   top:0;
+   left: -55vw;
+   width: 60vw;
+   height: 100vh;
+   background-color: rgba(0,0,0,.5);
+
+   &:hover {
+      left:-50vw;
+   }
 }
