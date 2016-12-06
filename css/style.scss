@@ -1,7 +1,10 @@
-
+// SASS TO SAVE
 @import '_reset.scss';
+@import 'buttons.scss';
+
 // TYMCZASOWO:
 @import url('https://fonts.googleapis.com/css?family=Shadows+Into+Light+Two');
+
 
 $basic_1: red;
 $basic_2: black;
@@ -19,16 +22,16 @@ $setlist_font: ;
       left: -50%;
       z-index: -1;
       background: url('../images/main_background.png') top left / 25px repeat white;
-      -webkit-transform: rotate(30deg);
-      -moz-transform: rotate(30deg);
-      -ms-transform: rotate(30deg);
-      -o-transform: rotate(30deg);
-      transform: rotate(30deg);
-      opacity: 0.5;
+      -webkit-transform: rotate(-40deg);
+      -moz-transform: rotate(-40deg);
+      -ms-transform: rotate(-40deg);
+      -o-transform: rotate(-40deg);
+      transform: rotate(-40deg);
+      opacity: 0.3;
    }
 }
 
-// BASIC SECTIONS
+// BASIC SECTIONS SIZES
 .main_container {
    @include bgImage;
    height: 100vh;
@@ -37,55 +40,121 @@ $setlist_font: ;
    nav#menu {
       height: 8vh;
       background-color: lightgrey;
+
+      min-height: 40px;
+      width: 100vw;
+
    }
 
-   section#setlist {
+   section.setlist_container {
       font-family: $main_font;
       font-size: 1.5em;
       height: 88vh;
-      padding: 30px;
+      // padding: 30px 30px 30px 80px;
+      padding: 10px 30px;
+      display: flex;
+      justify-content: center;
+
+
+      .setlist {
+         max-width:100%;
+         height: 100%;
+         overflow-y: auto;
+         .description {
+            width: 100%;
+            font-size: 0.8em;
+            display: flex;
+            justify-content: center;
+            p{
+               width: 90vw;
+
+            }
+         }
+      }
 
    }
 
    section#generator {
+      padding: 2px;
+      width: 100vw;
       position: fixed;
-      bottom: 4vh;
-      height: 4vh;
-      background-color: powderblue;
+      bottom: -14vh;
+      height: 20vh;
+      min-height: 30px;
+      background-color: #373a47;
+
+      min-height: 28px;
    }
 
    footer{
+
+      position: fixed;
+      bottom: 0;
+      width: 100vw;
+      min-height: 10px;
+
       height: 4vh;
       text-align: center;
       background-color: lightsalmon;
    }
 }
 
+// SETLIST:
 
-
-// GENERATOR
-buton#toggleGenerator {
+.setlist_container {
 
 }
 
-button#generateSetList {
+hr {
+   height: 3px;
+}
 
-   text-align: center;
+// GENERATOR
+.buttons {
+   display: flex;
+   justify-content: center;
 
+   button#toggleGenerator {
+      width: 20%;
+      height: 35px;
+   }
+
+   button#generateSetList {
+      width: 80%;
+      text-align: center;
+      height: 35px;
+
+   }
+}
+
+form#parameters {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin-top:10px;
+   overflow: hidden;
+
+   height:60%;
+
+   .middle_input {
+      margin: 0 20px;
+   }
 }
 
 
 // SIDEBAR
 
 div.sidebar {
-   position: absolute;
+   position: fixed;
    top:0;
-   left: -55vw;
-   width: 60vw;
+   left: -150px;
+   width: 200px;
    height: 100vh;
    background-color: rgba(0,0,0,.5);
 
    &:hover {
-      left:-50vw;
+      left:-120px;
    }
+
+   display: none;
 }

@@ -14,29 +14,60 @@
 
 
 $(document).ready(function() {
+   var form = $('form#parameters');
+   var sets = form.find('input[name="sets"]');
+   var setDuration = form.find('select[name="setDuration"]');
+   var eventCheckbox = form.find('input[name="event"]');
+
+   sets.on('change',function(){
+      var options = $('form option');
+      options.attr('selected',false).hide();
+
+      if($(this).val()==2) {
+         options.eq(0).show();
+         options.eq(1).show().attr('selected',true);
+      }else if($(this).val()==3){
+         options.eq(0).show().attr('selected',true);
+      }else {
+         options.show().eq(2).attr('selected',true);
+      }
+   })
 
 
-   $('#generateSetList').click(function(){
-      generateSetList(3000,1,'concert');
-   });
+
+   form.on('submit',function(e){
+      e.preventDefault();
+      var setsNumber = $('input[type="radio"]:checked').val();
+      var duration = setDuration.val() * 60;
+      var showType = eventCheckbox.prop('checked') ? 'event' : 'concert'
+      var generated = generateSetList(duration, setsNumber ,showType);
+      console.log(setsNumber);
+
+      loadLists(generated.setlists, generated.rest);
+      
+   })
+
+
+
+
 
    $('#toggleGenerator').click(function(){
       var self = $(this);
       if(self.hasClass('full')){
          self.removeClass('full').closest('section').animate({
-            'height': '4vh'
+            'bottom': '-14vh'
          },'slow');
 
       }else {
          self.addClass('full').closest('section').animate({
-            'height': '18vh'
+            'bottom': '0'
          },'slow');
 
       }
    });
 
 
-// SIDEBAR:
+   // SIDEBAR:
 
    var self=$(this);
    $('sidebar').on({
@@ -47,6 +78,4 @@ $(document).ready(function() {
          self.css({left: '2vw'})
       }
    })
-
-
 });

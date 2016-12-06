@@ -32,7 +32,7 @@ function checkDuration(list){
 
 
 // Główna funkcja losująca piosenki do setlisty - przyjmuje za parametr czas trwania jednego seta, ilość setów i typ imprezy;
-function generateSetList(duration,sets,showType) {
+function generateSetList (duration,sets,showType) {
    var songs = Array.from(songDatabase);
    shuffle(songs);
 
@@ -63,7 +63,11 @@ function generateSetList(duration,sets,showType) {
          if(counter<1000){
             randomSongs(setlist, songs, showType, sets);
          }else {
-            console.log('Losuj jeszcze raz brakło piosenek');
+            alert('Losuj jeszcze raz brakło piosenek, wrzucono po prostu pozostałe');
+            songs.forEach(function(element,index){
+               setlist.push(element);
+            });
+            songs=[];
             break;
          }
          counter++;
@@ -78,23 +82,25 @@ function generateSetList(duration,sets,showType) {
       // tu się kończy pętla for zliczająca numer seta
    }
 
-   checkDuration(setlist);
-   checkDuration(songs);
-
-   // tmpLog(songs,setlist);
 
 
-   var $ul = $('#setList').empty();
+   var result = {
+      setlists: finalSetlist,
+      rest: songsLeft
+   }
+
+   var $ul = $('.setlist').empty();
    console.log(finalSetlist);
    finalSetlist.forEach (function(element, index){
       var hr = $('<hr>');
-      $('#setList').append(hr);
+      $('.setlist').append(hr);
       tmpDisplayLists(element, $ul);
 
    })
    var $ul2 = $('#rest').empty();
    tmpDisplayLists(songsLeft, $ul2);
 
+   return result;
 };
 
 
@@ -104,6 +110,30 @@ function tmpDisplayLists(list, $ul){
       $ul.append(li);
    });
 }
+
+function loadLists(lists, rest){
+   var $sets_container = $('section.setlist_container');
+   var $sidebar_ul = $('#rest');
+
+   $sets_container.empty();
+   $sidebar_ul.empty();
+
+   // setlist:
+   $(lists).each(function(index,set){
+      var $ul = $('<ul>');
+      $(set).each(function(i,song){
+            var $li = $('<li>',{class: 'song'}).text((i+1)+' '+ song.title);
+            $ul.append($li);
+      });
+      $sets_container.append($ul);
+   });
+
+   $(rest).each(function(index,song){
+      var li = $('<li>',{class: 'song'}).text((index+1)+' '+ song.title);
+      $sidebar_ul.append(li);
+   });
+}
+
 function tmpLog(songs,setlist){
    console.log(songs, '\n ---------');
    console.log('Aktualna setlista: ');
@@ -184,8 +214,8 @@ function checkStart(songs, setlist, start){
    for (var r=0; r<songs.length; r++) {
       if(songs[r].energyRating>=4){
          setlist.push(songs[r]);
-         songs.splice(r,1);
          console.log('WYLOSOWANO PIOSENKĘ STARTOWĄ bez paramtru start' + songs[r].title);
+         songs.splice(r,1);
          return true;
       }
    }

@@ -98,3 +98,41 @@ var songDatabase = [
    blackMagic,
    moneymaker
 ];
+
+function rewriteToJSON(song){
+   document.write(
+      '{<br>'+
+      '<br>"title": "'+ song.title +'",' +
+      '<br>"mustBe": "'+ song.mustBe +'",' +
+      '<br>"duration": "'+ song.duration +'",' +
+      '<br>"tempo": "'+ song.tempo +'",' +
+      '<br>"energyRating": "'+ song.energyRating +'",' +
+      '<br>"start": "'+ song.start +'",' +
+      '<br>"end": "'+ song.end +'",' +
+      '<br>"bis": "'+ song.bis +'",' +
+      '<br>"only": "'+ song.only +'",' +
+      '<br>"specialCondition": "'+ song.specialCondition +'",' +
+      '<br>"conditionCheck": "'+ song.conditionCheck +'",' +
+
+
+      '<br><br>},<br><br>'
+   )
+}
+
+
+
+
+function loadContent(){
+      var ajax = $.ajax({
+         url: 'http://localhost/generator/songBase.json',
+         dataType: 'json',
+      }).done(function(response) {
+         $.each(response, function(i,el){
+            console.log(el.title);
+         })
+      }).fail(function() {
+         console.log("error");
+      }).always(function() {
+         console.log("complete");
+      });
+   }

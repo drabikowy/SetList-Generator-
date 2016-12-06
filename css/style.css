@@ -53,6 +53,157 @@ table {
   border-spacing: 0;
 }
 
+input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+}
+
+/* Normal Track */
+input[type="checkbox"].ios-switch + div {
+  vertical-align: middle;
+  width: 40px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 999px;
+  background-color: rgba(0, 0, 0, 0.1);
+  -webkit-transition-duration: .4s;
+  -webkit-transition-property: background-color, box-shadow;
+  box-shadow: inset 0 0 0 0px rgba(0, 0, 0, 0.4);
+  margin: 15px 0 15px 10px;
+}
+
+/* Checked Track (Blue) */
+input[type="checkbox"].ios-switch:checked + div {
+  width: 40px;
+  background-position: 0 0;
+  background-color: #3b89ec;
+  border: 1px solid #0e62cd;
+  box-shadow: inset 0 0 0 10px #3b89ff;
+}
+
+/* Tiny Track */
+input[type="checkbox"].tinyswitch.ios-switch + div {
+  width: 34px;
+  height: 18px;
+}
+
+/* Big Track */
+input[type="checkbox"].bigswitch.ios-switch + div {
+  width: 50px;
+  height: 25px;
+}
+
+/* Green Track */
+input[type="checkbox"].green.ios-switch:checked + div {
+  background-color: #00e359;
+  border: 1px solid #00a23f;
+  box-shadow: inset 0 0 0 10px #00e359;
+}
+
+/* Normal Knob */
+input[type="checkbox"].ios-switch + div > div {
+  float: left;
+  width: 18px;
+  height: 18px;
+  border-radius: inherit;
+  background: #ffffff;
+  -webkit-transition-timing-function: cubic-bezier(0.54, 1.85, 0.5, 1);
+  -webkit-transition-duration: 0.4s;
+  -webkit-transition-property: transform, background-color, box-shadow;
+  -moz-transition-timing-function: cubic-bezier(0.54, 1.85, 0.5, 1);
+  -moz-transition-duration: 0.4s;
+  -moz-transition-property: transform, background-color;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3), 0px 0px 0 1px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+  margin-top: 1px;
+  margin-left: 1px;
+}
+
+/* Checked Knob (Blue Style) */
+input[type="checkbox"].ios-switch:checked + div > div {
+  -webkit-transform: translate3d(20px, 0, 0);
+  -moz-transform: translate3d(20px, 0, 0);
+  background-color: #ffffff;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3), 0px 0px 0 1px #0850ac;
+}
+
+/* Tiny Knob */
+input[type="checkbox"].tinyswitch.ios-switch + div > div {
+  width: 16px;
+  height: 16px;
+  margin-top: 1px;
+}
+
+/* Checked Tiny Knob (Blue Style) */
+input[type="checkbox"].tinyswitch.ios-switch:checked + div > div {
+  -webkit-transform: translate3d(16px, 0, 0);
+  -moz-transform: translate3d(16px, 0, 0);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3), 0px 0px 0 1px #0850ac;
+}
+
+/* Big Knob */
+input[type="checkbox"].bigswitch.ios-switch + div > div {
+  width: 23px;
+  height: 23px;
+  margin-top: 1px;
+}
+
+/* Checked Big Knob (Blue Style) */
+input[type="checkbox"].bigswitch.ios-switch:checked + div > div {
+  -webkit-transform: translate3d(25px, 0, 0);
+  -moz-transform: translate3d(16px, 0, 0);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3), 0px 0px 0 1px #0850ac;
+}
+
+/* Green Knob */
+input[type="checkbox"].green.ios-switch:checked + div > div {
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3), 0 0 0 1px #00a23f;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+input[type="radio"] + label {
+  color: #292321;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+input[type="radio"] + label span {
+  width: 21px;
+  height: 21px;
+  display: inline-block;
+  margin: -1px 4px 0 0;
+  vertical-align: middle;
+  cursor: pointer;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+
+input[type="radio"] + label span {
+  background-color: #292321;
+}
+
+input[type="radio"]:checked + label span {
+  background-color: #3b89ff;
+}
+
+input[type="radio"] + label span,
+input[type="radio"]:checked + label span {
+  -webkit-transition: background-color 0.2s linear;
+  -o-transition: background-color 0.2s linear;
+  -moz-transition: background-color 0.2s linear;
+  transition: background-color 0.4s linear;
+}
+
+span.radio_label {
+  color: white;
+  text-align: center;
+  padding: 4px;
+  font-size: 12px;
+}
+
 .main_container {
   height: 100vh;
   padding: 0;
@@ -67,52 +218,111 @@ table {
   left: -50%;
   z-index: -1;
   background: url("../images/main_background.png") top left/25px repeat white;
-  -webkit-transform: rotate(30deg);
-  -moz-transform: rotate(30deg);
-  -ms-transform: rotate(30deg);
-  -o-transform: rotate(30deg);
-  transform: rotate(30deg);
-  opacity: 0.5;
+  -webkit-transform: rotate(-40deg);
+  -moz-transform: rotate(-40deg);
+  -ms-transform: rotate(-40deg);
+  -o-transform: rotate(-40deg);
+  transform: rotate(-40deg);
+  opacity: 0.3;
 }
 
 .main_container nav#menu {
   height: 8vh;
   background-color: lightgrey;
+  min-height: 40px;
+  width: 100vw;
 }
 
-.main_container section#setlist {
+.main_container section.setlist_container {
   font-family: "Shadows Into Light Two";
   font-size: 1.5em;
   height: 88vh;
-  padding: 30px;
+  padding: 10px 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.main_container section.setlist_container .setlist {
+  max-width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.main_container section.setlist_container .setlist .description {
+  width: 100%;
+  font-size: 0.8em;
+  display: flex;
+  justify-content: center;
+}
+
+.main_container section.setlist_container .setlist .description p {
+  width: 90vw;
 }
 
 .main_container section#generator {
+  padding: 2px;
+  width: 100vw;
   position: fixed;
-  bottom: 4vh;
-  height: 4vh;
-  background-color: powderblue;
+  bottom: -14vh;
+  height: 20vh;
+  min-height: 30px;
+  background-color: #373a47;
+  min-height: 28px;
 }
 
 .main_container footer {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  min-height: 10px;
   height: 4vh;
   text-align: center;
   background-color: lightsalmon;
 }
 
-button#generateSetList {
+hr {
+  height: 3px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.buttons button#toggleGenerator {
+  width: 20%;
+  height: 35px;
+}
+
+.buttons button#generateSetList {
+  width: 80%;
   text-align: center;
+  height: 35px;
+}
+
+form#parameters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  overflow: hidden;
+  height: 60%;
+}
+
+form#parameters .middle_input {
+  margin: 0 20px;
 }
 
 div.sidebar {
-  position: absolute;
+  position: fixed;
   top: 0;
-  left: -55vw;
-  width: 60vw;
+  left: -150px;
+  width: 200px;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
+  display: none;
 }
 
 div.sidebar:hover {
-  left: -50vw;
+  left: -120px;
 }
