@@ -1,4 +1,6 @@
+@import url(animate.css);
 @import url("https://fonts.googleapis.com/css?family=Shadows+Into+Light+Two");
+@import url("https://fonts.googleapis.com/css?family=Roboto");
 * {
   box-sizing: border-box;
 }
@@ -205,68 +207,37 @@ span.radio_label {
 }
 
 .main_container {
-  height: 100vh;
+  background: url("../images/back.jpg") center center/cover no-repeat;
   padding: 0;
-}
-
-.main_container:before {
-  content: "";
-  position: fixed;
-  width: 200%;
-  height: 200%;
-  top: -50%;
-  left: -50%;
-  z-index: -1;
-  background: url("../images/main_background.png") top left/25px repeat white;
-  -webkit-transform: rotate(-40deg);
-  -moz-transform: rotate(-40deg);
-  -ms-transform: rotate(-40deg);
-  -o-transform: rotate(-40deg);
-  transform: rotate(-40deg);
-  opacity: 0.3;
+  min-height: 97vh;
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .main_container nav#menu {
+  position: fixed;
+  top: 0;
   height: 8vh;
-  background-color: lightgrey;
+  background-color: #eeeeee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   min-height: 40px;
   width: 100vw;
 }
 
-.main_container section.setlist_container {
-  font-family: "Shadows Into Light Two";
-  font-size: 1.5em;
-  height: 88vh;
-  padding: 10px 30px;
-  display: flex;
-  justify-content: center;
-}
-
-.main_container section.setlist_container .setlist {
-  max-width: 100%;
-  height: 100%;
-  overflow-y: auto;
-}
-
-.main_container section.setlist_container .setlist .description {
-  width: 100%;
-  font-size: 0.8em;
-  display: flex;
-  justify-content: center;
-}
-
-.main_container section.setlist_container .setlist .description p {
-  width: 90vw;
-}
-
 .main_container section#generator {
+  font-family: "Roboto";
   padding: 2px;
   width: 100vw;
   position: fixed;
   bottom: -14vh;
   height: 20vh;
   min-height: 30px;
-  background-color: #373a47;
+  background-color: #eeeeee;
   min-height: 28px;
 }
 
@@ -277,27 +248,100 @@ span.radio_label {
   min-height: 10px;
   height: 4vh;
   text-align: center;
-  background-color: lightsalmon;
+  background-color: #eeeeee;
+}
+
+section.setlist_container {
+  font-family: "Shadows Into Light Two";
+  font-size: 1.5em;
+  max-width: 95%;
+  min-height: 80vh;
+  padding: 4% 40px 5% 30px;
+  margin-top: 11vh;
+  margin-bottom: 6vh;
+  background-color: transparent;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  overflow-y: auto;
+}
+
+@media (min-width: 768px) {
+  section.setlist_container {
+    flex-flow: row nowrap;
+    justify-content: center;
+    padding: 2% 50px 50px 50px;
+    align-items: center;
+  }
+}
+
+@media (min-width: 400px) {
+  section.setlist_container {
+    min-width: 355px;
+  }
+}
+
+section.setlist_container ul {
+  padding-left: 20px;
+  padding-top: 30px;
+}
+
+@media (min-width: 768px) {
+  section.setlist_container ul {
+    padding-right: 20px;
+  }
+}
+
+.description {
+  min-height: 69vh;
+  width: 100%;
+  font-size: 0.8em;
+  line-height: 1.4;
+  text-align: left;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 360px) {
+  .description {
+    text-align: justify;
+  }
+}
+
+.description div.generator_logo {
+  width: 150px;
+  height: 150px;
+  margin-top: 15px;
+  margin-bottom: 30px;
+  background: url("../images/generator_logo.png") center center/contain no-repeat;
+}
+
+.description p {
+  font-size: 0.92em;
+  display: none;
+  max-width: 95vw;
+}
+
+@media (min-width: 400px) {
+  .description p {
+    display: block;
+  }
+}
+
+@media (min-width: 768px) {
+  .description p {
+    width: 640px;
+  }
 }
 
 hr {
   height: 3px;
 }
 
-.buttons {
-  display: flex;
-  justify-content: center;
-}
-
-.buttons button#toggleGenerator {
-  width: 20%;
-  height: 35px;
-}
-
-.buttons button#generateSetList {
-  width: 80%;
-  text-align: center;
-  height: 35px;
+form select {
+  border-radius: 15px;
 }
 
 form#parameters {
@@ -313,16 +357,73 @@ form#parameters .middle_input {
   margin: 0 20px;
 }
 
-div.sidebar {
-  position: fixed;
-  top: 0;
-  left: -150px;
-  width: 200px;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: none;
+div.generator_buttons {
+  display: flex;
+  justify-content: center;
 }
 
-div.sidebar:hover {
-  left: -120px;
+button {
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 15px;
+  border: 1px solid black;
+}
+
+button#toggle_songDatabase {
+  height: 35px;
+  width: 250px;
+}
+
+button#toggleGenerator {
+  width: 20%;
+  height: 35px;
+}
+
+button#generateSetList {
+  width: 80%;
+  text-align: center;
+  height: 35px;
+}
+
+div.sidebar {
+  position: fixed;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: -30vw;
+  width: 35vw;
+  height: 100vh;
+  background: url("../images/ptaszek_reversed.png") center center/contain no-repeat;
+  background-color: rgba(238, 238, 238, 0.5);
+}
+
+div.sidebar ul {
+  background-color: white;
+  font-family: "Roboto";
+  font-size: 1.5em;
+  line-height: 1.5;
+}
+
+.song_database {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  right: -100vw;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #eeeeee;
+}
+
+.song_database .songDatabase_form_container {
+  height: 80vh;
+  width: 40vw;
+}
+
+.song_database .database {
+  height: 100vh;
+  width: 60vw;
+  background-color: rgba(255, 255, 255, 0.5);
 }

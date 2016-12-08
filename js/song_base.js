@@ -17,122 +17,123 @@
 
 
 
-function Song(title, mustBe, duration, tempo, energyRating, start, end, bis, only) {
+function Song(title, mustBe, duration, tempo, energyRating, start, end, bis, only,specialCondition, conditionCheck) {
+   this.stringConvert = function(string){
+      if (typeof(string)==='string') {
+         if(string === 'false' || string==='0'){
+            return false;
+         }
+         if(string === 'true' || string==='1'){
+            return true;
+         }
+      }
+      return string;
+   };
 
    this.title = title;
-   this.mustBe = mustBe;
-   this.duration = duration;
+   this.mustBe = this.stringConvert(mustBe);
+   this.duration = parseInt(duration);
    this.tempo = tempo;
-   this.energyRating = energyRating;
-   this.start = start;
-   this.end = end;
-   this.bis = bis;
-   this.only = only;
-   this.specialCondition = false;
-   this.conditionCheck;
-
+   this.energyRating = parseInt(energyRating);
+   this.start = this.stringConvert(start);
+   this.end = this.stringConvert(end);
+   this.bis = this.stringConvert(bis);
+   this.only = this.stringConvert(only);
+   this.specialCondition = this.stringConvert(specialCondition);
+   this.conditionCheck = conditionCheck;
 }
 
 
-//Dodaję piosenki do bazy:
-// ************************ songlist: *********************************************
-
-var flipFlop = new Song ("Flip Flop",true, 180, "fast", 5, true, true, true, false);
-var iLikePie = new Song ("I Like Pie I Like Cake",true, 150, "fast", 5, false, false, false, false);
-var holdOn = new Song("Hold On",false, 210, "fast", 4, true, true, true, false);
-var wayDown = new Song ("Way Down",true, 310, "slow", 1, false, false, false, "concert");
-
-// przykładowe ustawienie parametru specialCondition: piosenka Way Down nie powinna występować na początku setlisty - dlatego podczas losowania sprawdzę jej aktualną długość - jeżeli ma mniej niż 5 piosenek, to nie mogę wstawić piosenki Way Down, a więc specialCondition ustawi się na 'true';
-wayDown.conditionCheck = function(setlist, songs, index){
-   if (setlist.length < 5) {
-      this.specialCondition = true;
-   }else {
-      this.specialCondition = false;
-   }
-}
-
-var missunderstood = new Song ("Don't Let Me Be Missunderstood", true, 230, "moderate", 4, false, true, true, false);
-var builtForComfort = new Song("Built For Comfort",false, 270, "moderate", 3, "etrue", false, false, false);
-var plenty = new Song("That's A Plenty",true, 200, "fast", 5, false, false, false, false);
-var hallelujah = new Song("Hallelujah I Love Her So",true, 180, 4, false, false, false, false);
-var cantJudge = new Song("Can't Judge A Book",false, 270, "fast", 5, "etrue", true, true,"event");
-var iWasMade = new Song("I Was Made For Loving You",false, 315, "slow", 1, false, false, false, "concert");
-var hotStuff = new Song("Hot Stuff",false, 170, "fast", 5, false, false, true, false);
-var midnightHour = new Song("In The Midnight Hour",true,260, "moderate", 4, "etrue", false, false, false);
-var saveMySoul = new Song ("Save My Soul",true, 300, false, false, false, "concert");
-var redHouse = new Song("Red House", false, 300,"moderate", 4, "etrue", false, false, false );
-
-var longTrain = new Song("Long Train Running", true, 300, "fast", 5, "etrue", true, false, false);
-longTrain.conditionCheck = function(setlist, songs, index){
-   if (this.title == 'Long Train Running' && setlist[setlist.length-1].title == "Kawliga") {
-      this.specialCondition = true;
-   }
-}
-
-var goingAway = new Song("Going Away", true, 300, "moderate", 3, "etrue", false, false, false);
-var happy = new Song("Happy Without", true, 300, "moderate", 3, "etrue", false, false, false);
-var moneymaker = new Song("Moneymaker", true, 200, "fast", 5, false, true, true, false);
-var kawliga = new Song("Kawliga", false, 300, "fast", 3, false, false, false, false);
-var blackMagic = new Song("Black Magic Woman", false, 320, "slow",3, false, false, false, "event");
-
-
-
-var songDatabase = [
-   flipFlop,
-   iLikePie,
-   holdOn,
-   wayDown,
-   missunderstood,
-   builtForComfort,
-   plenty,
-   hallelujah,
-   cantJudge,
-   iWasMade,
-   hotStuff,
-   midnightHour,
-   saveMySoul,
-   redHouse,
-   goingAway,
-   kawliga,
-   happy,
-   blackMagic,
-   moneymaker
-];
-
-function rewriteToJSON(song){
-   document.write(
-      '{<br>'+
-      '<br>"title": "'+ song.title +'",' +
-      '<br>"mustBe": "'+ song.mustBe +'",' +
-      '<br>"duration": "'+ song.duration +'",' +
-      '<br>"tempo": "'+ song.tempo +'",' +
-      '<br>"energyRating": "'+ song.energyRating +'",' +
-      '<br>"start": "'+ song.start +'",' +
-      '<br>"end": "'+ song.end +'",' +
-      '<br>"bis": "'+ song.bis +'",' +
-      '<br>"only": "'+ song.only +'",' +
-      '<br>"specialCondition": "'+ song.specialCondition +'",' +
-      '<br>"conditionCheck": "'+ song.conditionCheck +'",' +
-
-
-      '<br><br>},<br><br>'
-   )
-}
-
-
-
+var songDatabase =[];
+loadContent();
 
 function loadContent(){
-      var ajax = $.ajax({
-         url: 'http://localhost/generator/songBase.json',
-         dataType: 'json',
-      }).done(function(response) {
-         $.each(response, function(i,el){
-            console.log(el.title);
-         })
-      }).fail(function() {
-         console.log("error");
-      }).always(function() {
-         console.log("complete");
+   var ajax = $.ajax({
+      url: 'http://localhost/generator/json.php',
+      dataType: 'json',
+   }).done(function(response) {
+
+      response.songs.forEach(function(s,index){
+         var newSong = new Song(s.title,s.mustBe,s.duration,s.tempo,s.energyRating,s.start,s.end,s.bis,s.only,s.specialCondition,s.conditionCheck);
+         songDatabase.push(newSong);
       });
-   }
+   }).fail(function() {
+      console.log("error");
+   }).always(function() {
+      console.log("Wczytano piosenki z bazy danych");
+   });
+}
+
+function addToDatabase(song){
+   $.ajax({
+      url: 'http://localhost/generator/app.php',
+      type: 'POST',
+      data: song
+   })
+   .done(function(done) {
+      console.log(done);
+      loadContent();
+   })
+   .fail(function(error) {
+      console.log(error);
+   })
+   .always(function() {
+      console.log("complete");
+   });
+}
+
+$(document).ready(function() {
+
+   $('#songAddForm').on('submit',function(e){
+      e.preventDefault();
+
+      var title = $("input[name='title']").val();
+      var duration = $("input[name='duration']").val();
+      var mustBe =  $("input[name='mustBe'][checked]").val();
+      var tempo = $("select[name='tempo']>option[selected]").val();
+      var energyRating = $("input[name='energyRating'][checked]").val();
+      var start = $("input[name='start'][checked]").val();
+      var end = $("input[name='end'][checked]").val();
+      var encore = $("input[name='encore'][checked]").val();
+      var only = $("select[name='only']>option[selected]").val();
+      var specialCondition = 0;
+      var conditionCheck;
+
+      var songToAdd = {
+          title : title,
+          duration : duration,
+          mustBe :  mustBe,
+          tempo :  tempo,
+          energyRating : energyRating,
+          start : start,
+          end : end,
+          bis : encore,
+          only : only,
+          specialCondition : specialCondition,
+          conditionCheck : conditionCheck
+
+         // title: 'tytuł',
+         // duration: '300'
+      }
+
+
+      console.log(songToAdd);
+      console.log(title, duration, mustBe, tempo, energyRating, start, end, encore, only,specialCondition,conditionCheck);
+
+      addToDatabase(songToAdd);
+      listSongs(songDatabase);
+   });
+
+
+
+});
+
+function listSongs(database){
+   $('.database').empty();
+   var baseList = $('<ul>',{class: 'listOfSongs'})
+   $(database).each(function(index,song){
+      var newLi = $('<li>').text((index+1) +' '+song.title);
+      newLi.appendTo(baseList);
+   });
+   $('.database').empty().append(baseList);
+}

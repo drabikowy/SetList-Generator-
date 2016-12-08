@@ -9,24 +9,145 @@
 </head>
 <body>
 
-<div class="container">
-   <ul id='setList'>
-<p>
-   Ideą aplikacji jest rozwiązanie problemu, z którym spotykam się grając w zespole muzycznym! Bardzo często, przed koncertem, zespół stara się przygotować listę piosenek, które odegrane zostaną na koncercie - ustawić je w odpowiedniej kolejności, wybrać którą piosenką zacząć, którą skończyć, co zagrać na bis, ile piosenek w ogóle uwzględnić, w zależności od czasu trwania koncertu, ilości setów, itd., jednocześnie przy ustalaniu kolejności, uwzględniane są takie własności piosenek, jak tempo, to czy dana piosenka jest hitem(ulubionym przez ludzi) itd. Niektóre piosenki grywamy tylko na prywatnych, zamkniętych imprezach, podczas gdy na normalnym koncercie raczej ich nie uwzględniamy, skupiając się na autorskim materiale. Zatem możliwość automatycznego wygenerowania listy uzględniającej wszystkie takie kryteria jest wspaniałym udogodnieniem!
-</p>
-   </ul>
-   <ul id='rest'>
+   <div class="main_container">
+      <nav id='menu'>
+         <button type="button" id='toggle_songDatabase'>Song Database</button>
+      </nav>
+      <section class='setlist_container'>
+         <div class="description animated bounceInDown">
+            <div class="generator_logo">
+            </div>
+            <p>
+               Ideą aplikacji jest rozwiązanie problemu, z którym spotykam się grając w zespole muzycznym! Bardzo często, przed koncertem, zespół stara się przygotować listę piosenek, które odegrane zostaną na koncercie - ustawić je w odpowiedniej kolejności, wybrać którą piosenką zacząć, którą skończyć, co zagrać na bis, ile piosenek w ogóle uwzględnić, w zależności od czasu trwania koncertu, ilości setów, itd., jednocześnie przy ustalaniu kolejności, uwzględniane są takie własności piosenek, jak tempo, to czy dana piosenka jest hitem(ulubionym przez ludzi) itd. Niektóre piosenki grywamy tylko na prywatnych, zamkniętych imprezach, podczas gdy na normalnym koncercie raczej ich nie uwzględniamy, skupiając się na autorskim materiale. Zatem możliwość automatycznego wygenerowania listy uzględniającej wszystkie takie kryteria jest wspaniałym udogodnieniem!
+            </p>
+         </div>
+      </section>
 
-   </ul>
+      <section id='generator'>
+         <div class="generator_buttons">
+            <button type='submit' form='parameters' id='generateSetList'>Generuj Setlistę</button>
+            <button type="button"  id="toggleGenerator">pokaż/ukryj</button>
+         </div>
+
+         <!-- ..............GENERATOR PARAMETERS FORM..................... -->
+         <form id="parameters">
+            <!-- IOS SWITCHER -->
+            <label for="event">Event</label>
+            <div>
+               <label><input type="checkbox" name='event' class="ios-switch"  /><div><div></div></div></label>
+            </div>
+            <div class="middle_input">
+               <span>
+                  <input type="radio" id='radio01' name="sets" value='1' checked='true' />
+                  <label for="radio01"><span class='radio_label'>1</span></label>
+                  <input type="radio" id='radio02' name="sets" value='2' />
+                  <label for="radio02"><span class='radio_label'>2</span></label>
+                  <input type="radio" id='radio03' name="sets" value='3' />
+                  <label for="radio03"><span class='radio_label'>3</span></label>
+               </span>
+               <div>Ilość setów: </div>
+            </div>
+            <div>
+               <select name="setDuration">
+                  <option value="30">30 minut</option>
+                  <option value="45">45 minut</option>
+                  <option value="60" selected='true'>60 minut</option>
+                  <option value="90">90 minut</option>
+               </select>
+               <label for="setDuration">Czas jednego seta</label>
+            </div>
+         </form>
+      </section>
+
+      <!-- <footer> Stopka </footer> -->
+   </div>
 
 
-</div>
-<button id='generateSetList'>Generuj Setlistę</button>
+
+
+   <!-- ...........................SIDEBAR................................. -->
+   <div class="sidebar sortable">
+      <ul id='rest'>
+
+      </ul>
+   </div>
+
+
+
+
+
+
+
+   <!-- ..................................SONG DATABASE SECTION.............................. -->
+
+
+   <section class='song_database'>
+      <div class='songDatabase_form_container'>
+         <form id='songAddForm' method='POST'>
+            <div>Title
+               <input type='text' name='title' />
+            </div>
+            <div>Duration (s):
+               <input type='number' name='duration' />
+            </div>
+            <div>Must Be
+               <input type='radio' name='mustBe' value=true />
+               <input type='radio' name='mustBe' value=false checked/>
+            </div>
+            <div>Tempo
+               <select name='tempo'>
+                  <option value='slow'>Slow</option>
+                  <option value='moderate' selected>Moderate</option>
+                  <option value='fast'>Fast</option>
+               </select>
+            </div>
+            <div> Energy Rating
+               1<input type='radio' name='energyRating' value=1 />
+               2<input type='radio' name='energyRating' value=2 />
+               3<input type='radio' name='energyRating' value=3 checked />
+               4<input type='radio' name='energyRating' value=4 />
+               5<input type='radio' name='energyRating' value=5 />
+            </div>
+            <div> On Start
+               <label>Yes<input type='radio' name='start' value=true /></label>
+               <label>No<input type='radio' name='start' value=false checked/></label>
+            </div>
+            <div> On End
+               <label>Yes<input type='radio' name='end' value=true /></label>
+               <label>No<input type='radio' name='end' value=false checked/></label>
+            </div>
+            <div> On Encore
+               <label>Yes<input type='radio' name='encore' value=true  /></label>
+               <label>No<input type='radio' name='encore' value=false checked/></label>
+            </div>
+            <div>Event type:
+               <select name='only'>
+                  <option value='concert'>Concert</option>
+                  <option value='event' selected>Event</option>
+                  <option value='false' selected>Both</option>
+               </select>
+            </div>
+            <button>Add Song!</button>
+         </form>
+      </div>
+
+      <div class='database'>
+
+      </div>
+   </section>
+
+
+
+
+
+
 
 </body>
 
 <script type="text/javascript" src='js/jquery-3.1.1.min.js'></script>
+<script type="text/javascript" src='js/jquery-ui.min.js'></script>
 <script type="text/javascript" src='js/song_base.js'></script>
+<script type="text/javascript" src='js/basic.js'></script>
 <script type="text/javascript" src='js/engine.js'></script>
 <script type="text/javascript" src='js/app.js'></script>
 

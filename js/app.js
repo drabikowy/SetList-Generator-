@@ -14,10 +14,22 @@
 
 
 $(document).ready(function() {
+   // containers
+   var setlist_container = $('.setlist_container');
+   var main_container = $('.main_container');
+   var description = $('.description');
+   var sidebar = $('.sidebar');
+   var database_container = $('.song_database');
+
+   // form elements:
    var form = $('form#parameters');
    var sets = form.find('input[name="sets"]');
    var setDuration = form.find('select[name="setDuration"]');
    var eventCheckbox = form.find('input[name="event"]');
+
+   // buttons:
+   var generatorToggleButton = $('#toggleGenerator');
+   var songsDatabaseButton = $('#toggle_songDatabase')
 
    sets.on('change',function(){
       var options = $('form option');
@@ -34,24 +46,25 @@ $(document).ready(function() {
    })
 
 
-
    form.on('submit',function(e){
       e.preventDefault();
       var setsNumber = $('input[type="radio"]:checked').val();
       var duration = setDuration.val() * 60;
       var showType = eventCheckbox.prop('checked') ? 'event' : 'concert'
       var generated = generateSetList(duration, setsNumber ,showType);
-      console.log(setsNumber);
 
-      loadLists(generated.setlists, generated.rest);
-      
+      description.animateCss('zoomOutUp');
+
+      if ($('ul#set1').children().length>0) {
+         setlist_container.fadeOut('slow');
+      }
+
+      setTimeout(function(){loadLists(generated.setlists, generated.rest)},1000);
+
    })
 
 
-
-
-
-   $('#toggleGenerator').click(function(){
+   generatorToggleButton.click(function(){
       var self = $(this);
       if(self.hasClass('full')){
          self.removeClass('full').closest('section').animate({
@@ -59,6 +72,7 @@ $(document).ready(function() {
          },'slow');
 
       }else {
+
          self.addClass('full').closest('section').animate({
             'bottom': '0'
          },'slow');
@@ -66,16 +80,48 @@ $(document).ready(function() {
       }
    });
 
+   songsDatabaseButton.click(function(){
+      if (database_container.hasClass('full')) {
+         database_container.animate({
+            'right':'-100vw',
+         },'slow');
+         main_container.animate({
+            'right':0
+         },'slow');
+      }else {
+         database_container.animate({
+            'right':'0',
+         },'slow').addClass('full');
+         main_container.animate({
+            'right':'100vw'
+         },'slow');
+
+      }
+      
+      listSongs(songDatabase);
+   })
+
 
    // SIDEBAR:
 
-   var self=$(this);
-   $('sidebar').on({
+
+   sidebar.on({
       mouseenter: function(){
-         self.css({transform: translate('2vw')})
+         $(this).animateCss('bounce')
       },
-      mouseout: function(){
-         self.css({left: '2vw'})
+      click: function(){
+         if ($(this).hasClass('full')) {
+            $(this).animate({
+               'left':'-30vw',
+            },'slow').removeClass('full');
+         }else {
+            $(this).animate({
+               'left':'0',
+            },'slow').addClass('full');
+         }
       }
-   })
+   });
+
+
+
 });
