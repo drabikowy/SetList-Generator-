@@ -1,6 +1,3 @@
-
-
-
 // Główna funkcja losująca piosenki do setlisty - przyjmuje za parametr czas trwania jednego seta, ilość setów i typ imprezy;
 function generateSetList (duration,sets,showType) {
    var songs = Array.from(songDatabase);
@@ -12,9 +9,7 @@ function generateSetList (duration,sets,showType) {
    var start = (showType == 'event') ? 'etrue' : true;
    var only = (showType == 'event') ? 'event' : 'concert';
 
-
    for (var setNumber=1; setNumber<=sets; setNumber++){
-
       var setlist = [];
       //na początku losuję pierwszą piosenkę, jeżeli znajdzie to taką z parametrem start == true, jeżeli w bazie już takich nie ma to szukam dowolnej z energyRating >=3:
       checkStart(songs,setlist,start);
@@ -56,7 +51,6 @@ function generateSetList (duration,sets,showType) {
    return result;
 };
 
-
 // tu zdefiniowana jest funkcja do losowania piosenek w setliście, na podstawie kilku kryteriów
 function randomSongs(setlist, songs, showType, sets, setNumber){
    var prev = (setlist.length>2) ? setlist.length-2 : setlist.length-1;
@@ -79,7 +73,7 @@ function randomSongs(setlist, songs, showType, sets, setNumber){
 
          (prev.energyRating <= 2 && song.energyRating < 4 ) ||
 
-         // (song.mustBe !== false && checkPrevious(setlist, 5,'mustBe',false)) ||
+         (song.mustBe !== false && checkPrevious(setlist, 5,'mustBe',false)) ||
 
          (song.specialCondition) ||
 
@@ -164,18 +158,7 @@ function loadLists(lists, rest){
 
    // setlist:
    $(lists).each(function(index,set){
-      var $ul = $('<ul>').attr('id','set'+(index+1)).attr('class','sortable').sortable({
-         connectWith: ".sortable",
-         update: function( event, ui ) {
-            console.log($('.setlist_container'));
-            $('.setlist_container').find('ul').each(function(i,element){
-               $(element).children().each(function(index,el){
-                  $(el).find('span').text(index+1);
-               })
-            });
-         }
-
-      });
+      var $ul = $('<ul>').attr('id','set'+(index+1)).attr('class','sortable');
       $(set).each(function(i,song){
          var span = $('<span>',{class:'song_number'}).text(i+1);
          var $li = $('<li>',{class: 'song'}).text(' '+ song.title).prepend(span);
@@ -192,18 +175,22 @@ function loadLists(lists, rest){
       var span = $('<span>',{class: "song_number"});
       var li = $('<li>',{class: 'song'}).text(' '+ song.title);
       li.prepend(span);
-
       $sidebar_ul.append(li).show();
-      $sidebar_ul.sortable({
-         connectWith: ".sortable",
-         update: function( event, ui ) {
-            $('.setlist_container').find('ul').each(function(i,element){
-               $(element).children().each(function(index,el){
-                  $(el).find('span').text(index+1);
-               })
-            });
-         }
-      })
+   });
+
+   $('.sortable').sortable({
+      connectWith: ".sortable",
+      update: function( event, ui ) {
+         console.log($('.setlist_container'));
+         $('.sortable').each(function(i,element){
+            $(element).children().each(function(index,el){
+               $(el).find('.song_number').text(index+1);
+            })
+         });
+         $('.sidebar').find('span').empty();
+         console.log('Hopsa');
+      }
+
    });
 }
 

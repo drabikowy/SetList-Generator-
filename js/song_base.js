@@ -49,7 +49,7 @@ loadContent();
 
 function loadContent(){
    var ajax = $.ajax({
-      url: 'http://localhost/generator/json.php',
+      url: 'http://localhost/generator/php/getSongs.php',
       dataType: 'json',
    }).done(function(response) {
 
@@ -66,7 +66,7 @@ function loadContent(){
 
 function addToDatabase(song){
    $.ajax({
-      url: 'http://localhost/generator/app.php',
+      url: 'http://localhost/generator/php/addSongs.php',
       type: 'POST',
       data: song
    })
@@ -94,34 +94,41 @@ $(document).ready(function() {
       var energyRating = $("input[name='energyRating'][checked]").val();
       var start = $("input[name='start'][checked]").val();
       var end = $("input[name='end'][checked]").val();
-      var encore = $("input[name='encore'][checked]").val();
+      var encore = $("input[name='bis'][checked]").val();
       var only = $("select[name='only']>option[selected]").val();
+      var pass = $('input[type="password"]').val();
       var specialCondition = 0;
       var conditionCheck;
 
-      var songToAdd = {
-          title : title,
-          duration : duration,
-          mustBe :  mustBe,
-          tempo :  tempo,
-          energyRating : energyRating,
-          start : start,
-          end : end,
-          bis : encore,
-          only : only,
-          specialCondition : specialCondition,
-          conditionCheck : conditionCheck
+      if(title.length<5) {
+         alert('Title must contain at least 5 characters!');
+      }else if (pass != "ksb") {
+         alert('To add a song you have to give the safety code')
+      }else {
 
-         // title: 'tytuł',
-         // duration: '300'
+
+         var songToAdd = {
+            title : title,
+            duration : duration,
+            mustBe :  mustBe,
+            tempo :  tempo,
+            energyRating : energyRating,
+            start : start,
+            end : end,
+            bis : encore,
+            only : only,
+            specialCondition : specialCondition,
+            conditionCheck : conditionCheck
+
+         }
+
+
+         console.log(songToAdd);
+         console.log(title, duration, mustBe, tempo, energyRating, start, end, encore, only,specialCondition,conditionCheck);
+
+         addToDatabase(songToAdd);
+         listSongs(songDatabase);
       }
-
-
-      console.log(songToAdd);
-      console.log(title, duration, mustBe, tempo, energyRating, start, end, encore, only,specialCondition,conditionCheck);
-
-      addToDatabase(songToAdd);
-      listSongs(songDatabase);
    });
 
 
@@ -129,11 +136,12 @@ $(document).ready(function() {
 });
 
 function listSongs(database){
-   $('.database').empty();
+   $('.listOfSongs').remove();
    var baseList = $('<ul>',{class: 'listOfSongs'})
    $(database).each(function(index,song){
       var newLi = $('<li>').text((index+1) +' '+song.title);
+      console.log(song.title);
       newLi.appendTo(baseList);
    });
-   $('.database').empty().append(baseList);
+   $('.database').append(baseList);
 }
