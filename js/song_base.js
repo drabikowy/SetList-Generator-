@@ -2,7 +2,7 @@
 //Tworzę konstruktor klasy Song, który posłuży do dodawania piosenek do bazy:
 
 // każda piosenka zawierać będzie nstępujące właściwości:
-
+//
 // title - tytuł piosenki
 // duration - czas trwania (s)
 // mustBe - (true/false) - określenie czy dana piosenka musi być uwzględniona w liście
@@ -13,7 +13,7 @@
 // bis - (true/false/'only') - czy dana piosenka może być zagrana na bis, 'only' oznacza że nadaje się tylko na bis
 // only - ('event'/'concert'/false)  - czy ma być uwzględniana tylko na imprezach zamkniętych czy tylko na koncertach, czy zawsze
 // specialCondition - true/false - niektóre piosenki nie powinny występować po innych, albo w pierwszej części koncertu// jeżeli false - brak warunku, jeżeli true - piosenka nie może być wstawiona - domyślnie parametr przyjmie funkcję false, ale jeżeli piosenka ma jakieś szczególne warunki to zostanie on zmieniony na true za pomocą poniższej metody: conditionCheck
-//conditionCheck (method) - domyślnie brak;
+// conditionCheck (method) - domyślnie brak;
 
 
 

@@ -1,0 +1,31 @@
+$tablet: '768px';
+
+$basic_1: #eeeeee;
+$basic_2: black;
+$buttons: rgba(255,255,255,.7);
+$transpLight: rgba(238,238,238,.5);
+
+
+@font-face {
+    font-family: 'Dosis';
+    src: url('../fonts/dosis.woff2') format('woff2'),
+         url('../fonts/dosis.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Shadows Into Light Two';
+    src: url('../fonts/shadowsintolighttwo.woff2') format('woff2'),
+         url('../fonts/shadowsintolighttwo.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+$main_font: 'Dosis';
+$setlist_font: 'Shadows Into Light Two';
+@mixin button_font {
+   font-family: 'Dosis';
+   font-size: 1em;
+}
