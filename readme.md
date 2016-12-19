@@ -1,6 +1,6 @@
 # Kraków Street Band SetList Generator! #
 Aplikacja dostępna pod adresem:
-[www.drabikowy.unixstorm.org/generator_ksb](http://www.drabikowy.unixstorm.org/generator_ksb) <br>
+[www.drabikowy.pl/generator_ksb](http://www.drabikowy.pl/generator_ksb) <br>
 
 Opis projektu:<br>
 
