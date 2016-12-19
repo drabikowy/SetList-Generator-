@@ -1,9 +1,8 @@
 # Kraków Street Band SetList Generator! #
-
-Opis projektu:
 Aplikacja dostępna pod adresem:
-[www.drabikowy.unixstorm/generator_ksb](www.drabikowy.unixstorm/generator_ksb)
+[www.drabikowy.unixstorm/generator_ksb](www.drabikowy.unixstorm/generator_ksb) <br>
 
+Opis projektu:<br>
 
 Ideą aplikacji jest rozwiązanie problemu, z którym spotykam się grając w zespole muzycznym! Bardzo często, przed koncertem, zespół stara się przygotować listę piosenek, które odegrane zostaną na koncercie - ustawić je w odpowiedniej kolejności, wybrać którą piosenką zacząć, którą skończyć, co zagrać na bis, ile piosenek w ogóle uwzględnić, w zależności od czasu trwania koncertu, ilości setów, itd., jednocześnie przy ustalaniu kolejności, uwzględniane są takie własności piosenek, jak tempo, to czy dana piosenka jest hitem(ulubionym przez ludzi) itd. Niektóre piosenki grywamy tylko na prywatnych, zamkniętych imprezach, podczas gdy na normalnym koncercie raczej ich nie uwzględniamy, skupiając się na autorskim materiale.
 Zatem możliwość automatycznego wygenerowania listy uzględniającej wszystkie takie kryteria jest wspaniałym udogodnieniem!
