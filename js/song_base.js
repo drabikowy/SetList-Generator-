@@ -49,7 +49,7 @@ loadContent();
 
 function loadContent(){
    var ajax = $.ajax({
-      url: 'http://localhost/generator/php/getSongs.php',
+      url: 'http://drabikowy.pl/generator_ksb/php/getSongs.php',
       dataType: 'json',
    }).done(function(response) {
 
@@ -66,7 +66,7 @@ function loadContent(){
 
 function addToDatabase(song){
    $.ajax({
-      url: 'http://localhost/generator/php/addSongs.php',
+      url: 'http://drabikowy.pl/generator_ksb/php/addSongs.php',
       type: 'POST',
       data: song
    })
