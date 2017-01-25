@@ -57,8 +57,8 @@ function loadContent(){
          var newSong = new Song(s.title,s.mustBe,s.duration,s.tempo,s.energyRating,s.start,s.end,s.bis,s.only,s.specialCondition,s.conditionCheck);
          songDatabase.push(newSong);
       });
-   }).fail(function() {
-      console.log("error");
+   }).fail(function(error) {
+      console.log(error);
    }).always(function() {
       console.log("Wczytano piosenki z bazy danych");
    });
